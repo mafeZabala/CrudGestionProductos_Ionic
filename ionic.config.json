@@ -1,0 +1,7 @@
+{
+  "name": "Productos_Crud",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
