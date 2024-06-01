@@ -1,3 +1,73 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<ion-header>
+  <ion-toolbar style="--background: #db85fd; --color: white; text-align: center;">  <!-- Barra de herramientas con color lila -->
+    <ion-title style="font-weight: bold;">
+      Crud Gestión de Productos
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6">
+        <ion-item>
+          <ion-label position="floating" style="color: #9b59b6;">Filtrar por un Producto</ion-label>
+          <ion-input type="text" [(ngModel)]="filtroProducto"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" size-md="6">
+        <ion-item>
+          <ion-label position="floating" style="color: #9b59b6;">Filtrar por Unidad</ion-label>
+          <ion-input type="text" [(ngModel)]="filtroUnidad"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button expand="block" style="--background: #dfa9f4; --color: white;" (click)="nuevoProducto()">Agregar un Nuevo Producto</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Listar un Productos</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list>
+              <ion-item-group>
+                <ion-item-divider>
+                  <ion-label>Productos</ion-label>
+                </ion-item-divider>
+                <ion-item *ngFor="let producto of productos | filtro:filtroProducto:filtroUnidad">
+                  <ion-label>
+                    <h2>{{ producto.descripcion }}</h2>
+                    <p><strong>Presupuesto:</strong> {{ producto.presupuesto }}</p>
+                    <p><strong>Unidad:</strong> {{ producto.unidad }}</p>
+                    <p><strong>Cantidad:</strong> {{ producto.cantidad }}</p>
+                    <p><strong>Valor Unitario:</strong> $ {{ producto.valorUnitario }}</p>
+                    <p><strong>Valor Total:</strong> $ {{ producto.cantidad * producto.valorUnitario }}</p>
+                    <p><strong>Fecha del producto: </strong> {{ producto.fechaAdquisicion }}</p>
+                    <p><strong>Proveedor:</strong> {{ producto.proveedor }}</p>
+                  </ion-label>
+                  <ion-buttons slot="end">
+                    <ion-button style="--background: #ad66c9; --color: white;" (click)="editarProducto(producto)">Editar</ion-button>
+                    <ion-button color="danger" (click)="eliminarProducto(producto)">Eliminar</ion-button>
+                  </ion-buttons>
+                </ion-item>
+              </ion-item-group>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="footer-text" style="text-align: center;">
+      © Maria Fernanda Zabala Arciniegas
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
